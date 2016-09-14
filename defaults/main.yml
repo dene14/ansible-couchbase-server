@@ -38,7 +38,7 @@
 couchbase_server_edition: "enterprise"
 couchbase_server_admin: "Administrator"
 couchbase_server_password: "couchbase"
-couchbase_server_ram: 3072
+couchbase_server_ram: "{{ ((ansible_memtotal_mb|int)*0.6)|int }}"
 couchbase_server_admin_port: 8091
 couchbase_server_epmd_port: 4369
 couchbase_server_admin_ssl_port: 18091
@@ -64,3 +64,6 @@ couchbase_server_tmpdir: "/tmp"
 couchbase_server_tune_os: false
 couchbase_server_firewall: false
 couchbase_server_local_package: false
+
+# dene14 additions
+couchbase_package_download: "remote"        # also "local"
