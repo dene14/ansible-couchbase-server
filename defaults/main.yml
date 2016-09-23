@@ -66,4 +66,4 @@ couchbase_server_firewall: false
 couchbase_server_local_package: false
 
 # dene14 additions
-couchbase_package_download: "remote"        # also "local"
+couchbase_package_download: "local"        # "local", "remote", "repo"

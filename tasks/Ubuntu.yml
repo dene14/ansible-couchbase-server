@@ -42,26 +42,54 @@
   connection: local
   get_url: "url={{ couchbase_server_ubuntu_ce_url }} dest={{ role_path }}/files/{{ couchbase_server_ubuntu_ce_package }} sha256sum={{ couchbase_server_ubuntu_ce_sha256 }} timeout=240"
   run_once: true
-  when: couchbase_server_edition == "community" and couchbase_server_local_package != true
+  when: couchbase_server_edition == "community" and couchbase_server_local_package != true and couchbase_package_download == 'local'
   tags: installation
 
 - name: Copy package
   copy: "src={{ couchbase_server_ubuntu_ce_package }} dest=/tmp/{{ couchbase_server_ubuntu_ce_package }}"
-  when: couchbase_server_edition == "community" and couchbase_server_local_package != true
+  when: couchbase_server_edition == "community" and couchbase_server_local_package != true and couchbase_package_download == 'local'
   tags: installation
 
-- name: Install package
+- name: Download package
+  get_url: "url={{ couchbase_server_ubuntu_ce_url }} dest=/tmp/{{ couchbase_server_ubuntu_ce_package }} sha256sum={{ couchbase_server_ubuntu_ce_sha256 }} timeout=240"
+  when: couchbase_server_edition == "community" and couchbase_server_local_package != true and couchbase_package_download == 'remote'
+  tags: installation
+
+
+
+- name: Download repo seed
+  get_url: "url=http://packages.couchbase.com/releases/couchbase-release/couchbase-release-1.0-3-amd64.deb dest=/tmp/couchbase-release-1.0-3-amd64.deb timeout=240"
+  when: couchbase_package_download == 'repo'
+  tags: installation
+
+- name: Install repo package
+  become: yes
+  become_user: root
+  apt: "deb=/tmp/couchbase-release-1.0-3-amd64.deb state=present"
+  when: couchbase_package_download == "repo"
+  tags: installation
+
+- name: Install package (from repo)
+  become: yes
+  become_user: root
+  apt: "name=couchbase-server-community={{ couchbase_server_ubuntu_ce_version }}* state=present update_cache=yes"
+  when: couchbase_server_edition == "community" and couchbase_package_download == "repo"
+  tags: installation
+
+
+
+- name: Install package (from file)
   become: yes
   become_user: root
   apt: "deb=/tmp/{{ couchbase_server_ubuntu_ce_package }} state=present"
-  when: couchbase_server_edition == "community"
+  when: couchbase_server_edition == "community" and couchbase_package_download != "repo"
   tags: installation
 
 - name: Package file cleanup
   become: yes
   become_user: root
   file: "dest=/tmp/{{ couchbase_server_ubuntu_ce_package }} state=absent"
-  when: couchbase_server_edition == "community"
+  when: couchbase_server_edition == "community" and couchbase_package_download != "repo"
   tags: installation
 
 # Firewall (optional)
