@@ -91,10 +91,10 @@ couchbase_server_ubuntu_ee_sha256: 65c0ee37f0e6d816257b32a36207ec9b8e81c84112beb
 #
 #############################################################################
 
-couchbase_server_ubuntu_ce_version: 4.1.0
-couchbase_server_ubuntu_ce_package: couchbase-server-community_{{ couchbase_server_ubuntu_ce_version }}-ubuntu14.04_amd64.deb
-couchbase_server_ubuntu_ce_url: http://packages.couchbase.com/releases/{{ couchbase_server_ubuntu_ce_version }}/{{ couchbase_server_ubuntu_ce_package }}
-couchbase_server_ubuntu_ce_sha256: 400263bd03e32b69259ec9b821bf58922030ba9e2a266e2ef4a0d4ac162188ea
+#couchbase_server_ubuntu_ce_version: 4.1.0
+#couchbase_server_ubuntu_ce_package: couchbase-server-community_{{ couchbase_server_ubuntu_ce_version }}-ubuntu14.04_amd64.deb
+#couchbase_server_ubuntu_ce_url: http://packages.couchbase.com/releases/{{ couchbase_server_ubuntu_ce_version }}/{{ couchbase_server_ubuntu_ce_package }}
+#couchbase_server_ubuntu_ce_sha256: 400263bd03e32b69259ec9b821bf58922030ba9e2a266e2ef4a0d4ac162188ea
 
 #couchbase_server_ubuntu_ce_version: 4.0.0
 #couchbase_server_ubuntu_ce_package: couchbase-server-community_{{ couchbase_server_ubuntu_ce_version }}-ubuntu14.04_amd64.deb
