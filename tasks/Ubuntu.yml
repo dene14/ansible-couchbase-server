@@ -58,7 +58,7 @@
 
 
 - name: Download repo seed
-  get_url: url=https://packages.couchbase.com/releases/couchbase-release/couchbase-release-1.0-3-amd64.deb
+  get_url: url=http://packages.couchbase.com/releases/couchbase-release/couchbase-release-1.0-3-amd64.deb
            dest=/tmp/couchbase-release-1.0-3-amd64.deb timeout=240 validate_certs=no
   when: couchbase_package_download == 'repo'
   tags: installation
