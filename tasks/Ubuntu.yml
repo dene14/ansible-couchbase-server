@@ -58,15 +58,15 @@
 
 
 - name: Download repo seed
-  get_url: url=http://packages.couchbase.com/releases/couchbase-release/couchbase-release-1.0-3-amd64.deb
-           dest=/tmp/couchbase-release-1.0-3-amd64.deb timeout=240 validate_certs=no
+  get_url: url=http://packages.couchbase.com/releases/couchbase-release/couchbase-release-1.0-4-amd64.deb
+           dest=/tmp/couchbase-release-1.0-4-amd64.deb timeout=240 validate_certs=no
   when: couchbase_package_download == 'repo'
   tags: installation
 
 - name: Install repo package
   become: yes
   become_user: root
-  apt: "deb=/tmp/couchbase-release-1.0-3-amd64.deb state=present"
+  apt: "deb=/tmp/couchbase-release-1.0-4-amd64.deb state=present"
   when: couchbase_package_download == "repo"
   tags: installation
 
